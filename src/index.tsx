@@ -9,7 +9,10 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AppWrapper } from "./components/common/PageMeta";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -17,7 +20,9 @@ root.render(
   <React.StrictMode>
     <AppWrapper>
       <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
         <App />
+        </QueryClientProvider>
       </ThemeProvider>
     </AppWrapper>
   </React.StrictMode>

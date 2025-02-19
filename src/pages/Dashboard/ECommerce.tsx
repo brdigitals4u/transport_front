@@ -5,8 +5,19 @@ import MonthlyTarget from "../../components/ecommerce/MonthlyTarget";
 import RecentOrders from "../../components/ecommerce/RecentOrders";
 import DemographicCard from "../../components/ecommerce/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
+import { useNavigate } from "react-router";
+import { getItem } from "../../utils/storage";
+import { useEffect } from "react";
 
 export default function Ecommerce() {
+
+  const navigate = useNavigate();
+  const isAuthenticated = getItem("user");
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
   return (
     <>
       <PageMeta
