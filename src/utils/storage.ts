@@ -89,21 +89,21 @@ export function bsDecrypt(data: any) {
 const encryptValue = (param: any, key = config.secretKey) => {
   const encJsonId = CryptoJS.AES.encrypt(
     JSON.stringify(`${param} ${moment().toDate()}`),
-    key
+    key,
   ).toString();
 
   const encryptedId = CryptoJS.enc.Base64.stringify(
-    CryptoJS.enc.Utf8.parse(encJsonId)
+    CryptoJS.enc.Utf8.parse(encJsonId),
   );
   return encryptedId;
 };
 
 const decryptValue = (encryptedParam: string) => {
   const decData = CryptoJS.enc.Base64.parse(encryptedParam).toString(
-    CryptoJS.enc.Utf8
+    CryptoJS.enc.Utf8,
   );
   const bytes = CryptoJS.AES.decrypt(decData, config.secretKey).toString(
-    CryptoJS.enc.Utf8
+    CryptoJS.enc.Utf8,
   );
   return JSON.parse(bytes);
 };

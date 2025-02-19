@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ChartTab: React.FC = () => {
   const [selected, setSelected] = useState<
@@ -15,7 +15,7 @@ const ChartTab: React.FC = () => {
       <button
         onClick={() => setSelected("optionOne")}
         className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:bg-red-300 hover:text-white   dark:hover:text-white ${getButtonClass(
-          "optionOne"
+          "optionOne",
         )}`}
       >
         Monthly
@@ -24,7 +24,7 @@ const ChartTab: React.FC = () => {
       <button
         onClick={() => setSelected("optionTwo")}
         className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:bg-red-300 hover:text-white   dark:hover:text-white ${getButtonClass(
-          "optionTwo"
+          "optionTwo",
         )}`}
       >
         Quarterly
@@ -33,7 +33,7 @@ const ChartTab: React.FC = () => {
       <button
         onClick={() => setSelected("optionThree")}
         className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:bg-red-300 hover:text-white   dark:hover:text-white ${getButtonClass(
-          "optionThree"
+          "optionThree",
         )}`}
       >
         Annually

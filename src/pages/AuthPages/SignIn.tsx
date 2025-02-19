@@ -4,21 +4,21 @@ import GridShape from "../../components/common/GridShape";
 import Label from "../../components/form/Label";
 import { Link, useNavigate } from "react-router";
 import {
-//   ChevronLeftIcon,
-    EyeCloseIcon, EyeIcon } from "../../icons";
+  //   ChevronLeftIcon,
+  EyeCloseIcon,
+  EyeIcon,
+} from "../../icons";
 import Checkbox from "../../components/form/input/Checkbox";
 import Button from "../../components/ui/button/Button";
 import PageMeta from "../../components/common/PageMeta";
 
-
 import { useAxios } from "../../utils/useAxios";
 import { setItem } from "../../utils/storage";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  
 
   const navigate = useNavigate();
 
@@ -53,7 +53,6 @@ export default function SignIn() {
       />
       <div className="relative flex w-full h-screen px-4 py-6 overflow-hidden bg-white z-1 dark:bg-gray-900 sm:p-0">
         <div className="flex flex-col flex-1 p-6 rounded-2xl sm:rounded-none sm:border-0 sm:p-8">
-       
           <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
             <div>
               <div className="mb-5 sm:mb-8">
@@ -65,22 +64,24 @@ export default function SignIn() {
                 </p>
               </div>
               <div>
-               
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="space-y-6">
                     <div>
                       <Label>
                         Email <span className="text-error-500">*</span>{" "}
                       </Label>
-                      <input  placeholder="info@gmail.com"
-                      {...register("email", {
-                        required: true
-                      })}
-                      className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      <input
+                        placeholder="info@gmail.com"
+                        {...register("email", {
+                          required: true,
+                        })}
+                        className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
                       />
                       {errors.email && errors.email.type === "required" && (
-            <p className="text-red-500 text-sm mt-2">Email is required.</p>
-          )}
+                        <p className="text-red-500 text-sm mt-2">
+                          Email is required.
+                        </p>
+                      )}
                     </div>
                     <div>
                       <Label>
@@ -88,9 +89,9 @@ export default function SignIn() {
                       </Label>
                       <div className="relative">
                         <input
-                        {...register("password", {
-                          required: true
-                        })}
+                          {...register("password", {
+                            required: true,
+                          })}
                           type={showPassword ? "text" : "password"}
                           placeholder="Enter your password"
                           className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
@@ -105,12 +106,15 @@ export default function SignIn() {
                             <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
                           )}
                         </span>
-                        {errors.password && errors.password.type === "required" && (
-            <p className="text-red-500 text-sm mt-2">Password is required.</p>
-          )}
+                        {errors.password &&
+                          errors.password.type === "required" && (
+                            <p className="text-red-500 text-sm mt-2">
+                              Password is required.
+                            </p>
+                          )}
                       </div>
                     </div>
-                    {errors ? errors?.root?.message : ''}
+                    {errors ? errors?.root?.message : ""}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <Checkbox checked={isChecked} onChange={setIsChecked} />
@@ -127,7 +131,7 @@ export default function SignIn() {
                     </div>
                     <div>
                       <Button className="w-full" size="sm">
-                        {isPending ? 'Signing....' : 'Sign in'}
+                        {isPending ? "Signing...." : "Sign in"}
                       </Button>
                     </div>
                   </div>
