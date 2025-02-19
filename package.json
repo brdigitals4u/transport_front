@@ -79,7 +79,6 @@
     "@types/react-flatpickr": "^3.8.11",
     "@types/react-helmet": "~6.1.11",
     "@types/react-simple-maps": "~3.0.6",
-    "prettier": "3.5.1",
     "tailwindcss": "^3.4.15"
   }
 }
