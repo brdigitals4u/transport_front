@@ -74,6 +74,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/crypto-js": "~4.2.2",
     "@types/react-flatpickr": "^3.8.11",
     "@types/react-helmet": "~6.1.11",
