@@ -3,7 +3,9 @@ import GridShape from "../../components/common/GridShape";
 import Input from "../../components/form/input/InputField";
 import Label from "../../components/form/Label";
 import { Link } from "react-router";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
+import {
+//   ChevronLeftIcon,
+    EyeCloseIcon, EyeIcon } from "../../icons";
 import Checkbox from "../../components/form/input/Checkbox";
 import Button from "../../components/ui/button/Button";
 import PageMeta from "../../components/common/PageMeta";
@@ -19,7 +21,7 @@ export default function SignIn() {
       />
       <div className="relative flex w-full h-screen px-4 py-6 overflow-hidden bg-white z-1 dark:bg-gray-900 sm:p-0">
         <div className="flex flex-col flex-1 p-6 rounded-2xl sm:rounded-none sm:border-0 sm:p-8">
-          <div className="w-full max-w-md pt-10 mx-auto">
+          {/* <div className="w-full max-w-md pt-10 mx-auto">
             <Link
               to="/"
               className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
@@ -27,7 +29,7 @@ export default function SignIn() {
               <ChevronLeftIcon />
               Back to dashboard
             </Link>
-          </div>
+          </div> */}
           <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
             <div>
               <div className="mb-5 sm:mb-8">
@@ -39,7 +41,7 @@ export default function SignIn() {
                 </p>
               </div>
               <div>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+                {/* <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
                   <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                     <svg
                       width="20"
@@ -90,7 +92,7 @@ export default function SignIn() {
                       Or
                     </span>
                   </div>
-                </div>
+                </div> */}
                 <form>
                   <div className="space-y-6">
                     <div>
@@ -162,10 +164,10 @@ export default function SignIn() {
           <GridShape />
           <div className="flex flex-col items-center max-w-xs">
             <Link to="/" className="block mb-4">
-              <img src="./images/logo/auth-logo.svg" alt="Logo" />
+              <img src="./images/logo/tms-dark.svg" alt="Logo" />
             </Link>
             <p className="text-center text-gray-400 dark:text-white/60">
-              Free and Open-Source Tailwind CSS Admin Dashboard Template
+              We provide a simple transport management system.
             </p>
           </div>
         </div>

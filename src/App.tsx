@@ -24,7 +24,7 @@ export default function App() {
         <Routes>
           {/* Dashboard Layout */}
           <Route element={<AppLayout />}>
-            <Route index path="/" element={<Ecommerce />} />
+            <Route index path="/dashboard" element={<Ecommerce />} />
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
@@ -47,7 +47,7 @@ export default function App() {
 
           {/* Auth Layout */}
           <Route element={<AuthLayout />}>
-            <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>
 
