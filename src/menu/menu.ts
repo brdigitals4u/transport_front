@@ -1,26 +1,17 @@
-import {
-  BoxCubeIcon,
-  CalenderIcon,
-  ChevronDownIcon,
-  GridIcon,
-  HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
-  UserCircleIcon,
-} from "../icons";
+import { ComponentType } from "react";
+import { RxDashboard } from "react-icons/rx";
+
+import { IconType } from "react-icons";
 
 export const Menus = [
   {
-    icon: GridIcon,
+    icon: RxDashboard,
     name: "Dashboard",
     role: ["ADMIN"],
     path: "/dashboard",
   },
   {
-    icon: CalenderIcon,
+    icon: RxDashboard,
     name: "Masters",
     role: ["ADMIN", "CARRIER"],
     path: "/masters",
@@ -46,7 +37,7 @@ export const Menus = [
     ],
   },
   {
-    icon: CalenderIcon,
+    icon: RxDashboard,
     name: "Tracking",
     role: ["ADMIN", "CARRIER"],
     path: "/tracking",
@@ -64,9 +55,11 @@ export const Menus = [
     ],
   },
   {
-    icon: UserCircleIcon,
+    icon: RxDashboard,
     name: "Customers",
     path: "/customers",
     role: ["ADMIN"],
   },
 ];
+
+export const Other = [];
