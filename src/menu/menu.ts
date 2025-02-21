@@ -23,7 +23,7 @@ export const Menus = [
     icon: CalenderIcon,
     name: "Masters",
     role: ["ADMIN", "CARRIER"],
-    path: "/Masters",
+    path: "/masters",
     subItems: [
       {
         name: "Add Carrier",
@@ -41,6 +41,24 @@ export const Menus = [
       {
         name: "Existing Renewal Docs",
         path: "/existing-renewal-docs",
+        role: ["ADMIN", "CARRIER"],
+      },
+    ],
+  },
+  {
+    icon: CalenderIcon,
+    name: "Tracking",
+    role: ["ADMIN", "CARRIER"],
+    path: "/tracking",
+    subItems: [
+      {
+        name: "Track Vehicle",
+        path: "/tracking/trackvehicle",
+        role: ["ADMIN"],
+      },
+      {
+        name: "Start Point",
+        path: "/tracking/startPoint",
         role: ["ADMIN", "CARRIER"],
       },
     ],

@@ -20,19 +20,21 @@ const AppSidebar: React.FC = () => {
     }
   }, []);
 
+  // const handleDrop = (index: number) => {
+  //   setDropdownNumber((prev) => (prev === index ? null : index));
+  // };
   const handleDrop = (index: number) => {
     setDropdownNumber((prev) => (prev === index ? null : index));
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest(".dropdown-container")) {
-        setDropdownNumber(null);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (!(event.target as HTMLElement).closest(".dropdown-container")) {
+  //       setDropdownNumber(null);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => document.removeEventListener("click", handleClickOutside);
+  // }, []);
 
   return (
     <aside
@@ -93,18 +95,22 @@ const AppSidebar: React.FC = () => {
               <ul className="flex flex-col gap-4">
                 {menusItems.map((items, index) => {
                   const { name, path, icon: Icon, subItems } = items;
+
+                  // Check if any subItem is active
+                  const isActiveSubMenu = subItems?.some(
+                    (subItem: any) => location.pathname === subItem.path,
+                  );
+
+                  // Check if parent or any child is active
                   const isActiveParent =
-                    location.pathname.startsWith(path) ||
-                    dropdownNumber === index;
+                    location.pathname.startsWith(path) || isActiveSubMenu;
 
                   return (
-                    <li key={index} className="dropdown-container relative">
+                    <>
                       {subItems && subItems.length > 0 ? (
-                        <>
+                        <li key={index} className="dropdown-container relative">
                           <button
-                            className={`menu-item group ${
-                              isActiveParent ? "bg-indigo-500 text-white" : ""
-                            }`}
+                            className={`menu-item group ${isActiveParent ? "bg-indigo-500 text-white" : ""}`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleDrop(index);
@@ -116,19 +122,18 @@ const AppSidebar: React.FC = () => {
                             <span className="menu-item-text">{name}</span>
                             <ChevronDownIcon
                               className={`ml-auto w-5 h-5 transition-transform duration-200 ${
-                                isActiveParent ? "rotate-180" : ""
+                                dropdownNumber === index ? "rotate-180" : ""
                               }`}
                             />
                           </button>
 
-                          {dropdownNumber === index && (
+                          {dropdownNumber === index ? (
                             <div className="overflow-hidden transition-all duration-300">
                               <ul className="mt-2 space-y-1 ml-9">
                                 {subItems.map(
                                   (subItem: any, subIndex: number) => {
                                     const isActiveSub =
                                       location.pathname === subItem.path;
-
                                     return (
                                       <li key={subIndex}>
                                         <Link
@@ -147,24 +152,32 @@ const AppSidebar: React.FC = () => {
                                 )}
                               </ul>
                             </div>
-                          )}
-                        </>
+                          ) : null}
+                        </li>
                       ) : (
-                        <Link
-                          to={path}
-                          className={`menu-item group ${
-                            location.pathname === path
-                              ? "bg-indigo-500 text-white"
-                              : ""
-                          }`}
-                        >
-                          <span className="menu-item-icon-inactive">
-                            <Icon />
-                          </span>
-                          <span>{name}</span>
-                        </Link>
+                        <li key={index}>
+                          <Link
+                            to={path}
+                            className={`menu-item group ${
+                              location.pathname === path
+                                ? "bg-indigo-500 text-white"
+                                : ""
+                            }`}
+                          >
+                            <span
+                              className={`menu-item-icon-inactive ${
+                                location.pathname === path
+                                  ? "bg-indigo-500 text-white"
+                                  : ""
+                              }`}
+                            >
+                              <Icon />
+                            </span>
+                            <span>{name}</span>
+                          </Link>
+                        </li>
                       )}
-                    </li>
+                    </>
                   );
                 })}
               </ul>
