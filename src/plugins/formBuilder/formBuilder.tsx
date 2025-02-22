@@ -12,7 +12,7 @@ import NotFound from "../../pages/OtherPage/NotFound";
 import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
 
 interface Props {
-  formId: string;
+  getformData: any;
 }
 
 interface Column {
@@ -34,7 +34,7 @@ interface FormState {
   columns?: any;
 }
 
-export default function FormBuilder({ formId }: Props) {
+export default function FormBuilder({ getformData }: Props) {
   const [form, setForm] = useState<FormState>({});
   const [sections, setSections] = useState<Section[]>([]);
   const [columns, setColumns] = useState<Column[]>([]);
@@ -50,21 +50,11 @@ export default function FormBuilder({ formId }: Props) {
     mode: "onSubmit",
   });
 
-  const { res, mutate, isPending, error } = useAxios({
-    url: "/api/service/form",
-  });
-
   useEffect(() => {
-    if (formId) {
-      mutate({ formId });
+    if (getformData) {
+      setForm(getformData);
     }
-  }, [formId]);
-
-  useEffect(() => {
-    if (res?.data?.data) {
-      setForm(res.data.data);
-    }
-  }, [res]);
+  }, [getformData]);
 
   useEffect(() => {
     if (form?.sections) {
@@ -113,111 +103,109 @@ export default function FormBuilder({ formId }: Props) {
   ];
 
   // console.log(error?.code);
-  if (error?.code === "ERR_BAD_REQUEST") {
-    return <NotFound />;
-  }
+  // if (error?.code === "ERR_BAD_REQUEST") {
+  //   return <NotFound />;
+  // }
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <ComponentCard title={res?.data?.data?.title}>
-        {sectionsMerge.map((section, index) => {
-          // console.log(section?.sectionid);
-          return (
-            <div key={index} className="mb-5">
-              <MySection
-                title={`${section?.sectionid ? section?.title : ""}`}
-                sectionShow={section?.sectionid ? section?.title : ""}
-              >
-                <div className="grid grid-cols-3 gap-4">
-                  {section.columns?.map((formfield, findex) => {
-                    const { title, field, component, placeholder, options } =
-                      formfield as any;
+      {sectionsMerge.map((section, index) => {
+        // console.log(section?.sectionid);
+        return (
+          <div key={index} className="mb-5">
+            <MySection
+              title={`${section?.sectionid ? section?.title : ""}`}
+              sectionShow={section?.sectionid ? section?.title : ""}
+            >
+              <div className="grid grid-cols-3 gap-4">
+                {section.columns?.map((formfield, findex) => {
+                  const { title, field, component, placeholder, options } =
+                    formfield as any;
 
-                    const fieldSet = () => {
-                      switch (component) {
-                        case "input":
-                          return (
-                            <MyInput
-                              name={field}
-                              register={register}
-                              error={errors[field] as FieldError | undefined}
-                              placeholder={placeholder}
-                              validationRules={{
-                                required: `${title} is required`,
-                                // minLength: {
-                                //   value: 2,
-                                //   message: "Minimum length is 2",
-                                // },
-                                // maxLength: {
-                                //   value: 10,
-                                //   message: "Maximum length is 10",
-                                // },
-                              }}
-                            />
-                          );
-                        case "select":
-                          return (
-                            <MySelect
-                              name={field}
-                              register={register}
-                              error={errors[field] as FieldError | undefined}
-                              options={options}
-                              validationRules={{
-                                required: `${title} is required`,
-                              }}
-                            />
-                          );
-                        case "textarea":
-                          return (
-                            <MyTextArea
-                              name={field}
-                              register={register}
-                              error={errors[field] as FieldError | undefined}
-                              placeholder={placeholder}
-                              validationRules={{
-                                required: `${title} is required`,
-                                // minLength: {
-                                //   value: 10,
-                                //   message: "Minimum length is 10 characters",
-                                // },
-                                // maxLength: {
-                                //   value: 200,
-                                //   message: "Maximum length is 200 characters",
-                                // },
-                              }}
-                            />
-                          );
-                        default:
-                          return null;
-                      }
-                    };
+                  const fieldSet = () => {
+                    switch (component) {
+                      case "input":
+                        return (
+                          <MyInput
+                            name={field}
+                            register={register}
+                            error={errors[field] as FieldError | undefined}
+                            placeholder={placeholder}
+                            validationRules={{
+                              required: `${title} is required`,
+                              // minLength: {
+                              //   value: 2,
+                              //   message: "Minimum length is 2",
+                              // },
+                              // maxLength: {
+                              //   value: 10,
+                              //   message: "Maximum length is 10",
+                              // },
+                            }}
+                          />
+                        );
+                      case "select":
+                        return (
+                          <MySelect
+                            name={field}
+                            register={register}
+                            error={errors[field] as FieldError | undefined}
+                            options={options}
+                            validationRules={{
+                              required: `${title} is required`,
+                            }}
+                          />
+                        );
+                      case "textarea":
+                        return (
+                          <MyTextArea
+                            name={field}
+                            register={register}
+                            error={errors[field] as FieldError | undefined}
+                            placeholder={placeholder}
+                            validationRules={{
+                              required: `${title} is required`,
+                              // minLength: {
+                              //   value: 10,
+                              //   message: "Minimum length is 10 characters",
+                              // },
+                              // maxLength: {
+                              //   value: 200,
+                              //   message: "Maximum length is 200 characters",
+                              // },
+                            }}
+                          />
+                        );
+                      default:
+                        return null;
+                    }
+                  };
 
-                    return (
-                      <div key={findex}>
-                        <Label>{title}</Label>
-                        {fieldSet()}
-                      </div>
-                    );
-                  })}
-                </div>
-              </MySection>
-            </div>
-          );
-        })}
-        <div className="flex border-t pt-3 justify-end gap-2">
-          <button
-            type="reset"
-            className="rounded bg-gray-200 px-6 py-2 text-black font-medium hover:bg-gray-300"
-          >
-            Reset
-          </button>
-          <button
-            type="submit"
-            className="rounded bg-indigo-500 px-6 py-2 text-white font-medium hover:bg-indigo-700"
-          >
-            {formIsPending ? "Submitting" : "Submit"}
-          </button>
-        </div>
-      </ComponentCard>
+                  return (
+                    <div key={findex}>
+                      <Label>{title}</Label>
+                      {fieldSet()}
+                    </div>
+                  );
+                })}
+              </div>
+            </MySection>
+          </div>
+        );
+      })}
+      <div className="flex border-t pt-3 justify-end gap-2">
+        <button
+          type="reset"
+          className="rounded bg-gray-200 px-6 py-2 text-black font-medium hover:bg-gray-300"
+        >
+          Reset
+        </button>
+        <button
+          type="submit"
+          className="rounded bg-indigo-500 px-6 py-2 text-white font-medium hover:bg-indigo-700"
+        >
+          {formIsPending ? "Submitting" : "Submit"}
+        </button>
+      </div>
     </form>
   );
 }
