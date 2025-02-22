@@ -11,6 +11,9 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { AppWrapper } from "./components/common/PageMeta";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { SnackbarCloseButton } from "./components/SnackbarCloseButton";
+import { SnackbarProvider } from "notistack";
+
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -20,7 +23,19 @@ root.render(
     <AppWrapper>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <App />
+          <SnackbarProvider
+            action={(key) => (
+              <SnackbarCloseButton key={key as unknown as string} />
+            )}
+            //autoHideDuration={2000}
+            // open={true}
+            //persist={true}
+            maxSnack={1}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            hideIconVariant
+          >
+            <App />
+          </SnackbarProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </AppWrapper>

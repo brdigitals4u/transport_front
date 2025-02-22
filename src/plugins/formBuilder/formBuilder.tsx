@@ -9,6 +9,8 @@ import ComponentCard from "../../components/common/ComponentCard";
 import { MyTextArea } from "../../components/formFields/MyTextArea";
 import NotFound from "../../pages/OtherPage/NotFound";
 
+import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
+
 interface Props {
   formId: string;
 }
@@ -37,10 +39,13 @@ export default function FormBuilder({ formId }: Props) {
   const [sections, setSections] = useState<Section[]>([]);
   const [columns, setColumns] = useState<Column[]>([]);
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm({
     mode: "onSubmit",
   });
@@ -76,9 +81,31 @@ export default function FormBuilder({ formId }: Props) {
     }
   }, [form?.sections]);
 
+  const {
+    res: formRes,
+    mutate: formMutate,
+    isPending: formIsPending,
+    error: formError,
+  } = useAxios({
+    url: "/api/auth/submitdata",
+  });
+
   const onSubmit = (data: any) => {
-    console.log("Form Submitted:", data);
+    formMutate({
+      formId: "carrier",
+      formData: data,
+    });
   };
+
+  useEffect(() => {
+    if (formRes) {
+      enqueueSnackbar(formRes?.data?.message, {
+        variant: "success",
+      });
+      //console.log(formRes?.data?.success);
+      reset();
+    }
+  }, [formRes]);
 
   const sectionsMerge: Section[] = [
     ...sections,
@@ -102,7 +129,8 @@ export default function FormBuilder({ formId }: Props) {
               >
                 <div className="grid grid-cols-3 gap-4">
                   {section.columns?.map((formfield, findex) => {
-                    const { title, field, component, placeholder } = formfield;
+                    const { title, field, component, placeholder, options } =
+                      formfield as any;
 
                     const fieldSet = () => {
                       switch (component) {
@@ -115,14 +143,14 @@ export default function FormBuilder({ formId }: Props) {
                               placeholder={placeholder}
                               validationRules={{
                                 required: `${title} is required`,
-                                minLength: {
-                                  value: 2,
-                                  message: "Minimum length is 2",
-                                },
-                                maxLength: {
-                                  value: 10,
-                                  message: "Maximum length is 10",
-                                },
+                                // minLength: {
+                                //   value: 2,
+                                //   message: "Minimum length is 2",
+                                // },
+                                // maxLength: {
+                                //   value: 10,
+                                //   message: "Maximum length is 10",
+                                // },
                               }}
                             />
                           );
@@ -132,12 +160,7 @@ export default function FormBuilder({ formId }: Props) {
                               name={field}
                               register={register}
                               error={errors[field] as FieldError | undefined}
-                              options={[
-                                { value: "Truck", label: "Truck" },
-                                { value: "Air", label: "Air" },
-                                { value: "Rail", label: "Rail" },
-                                { value: "Ship", label: "Ship" },
-                              ]}
+                              options={options}
                               validationRules={{
                                 required: `${title} is required`,
                               }}
@@ -152,14 +175,14 @@ export default function FormBuilder({ formId }: Props) {
                               placeholder={placeholder}
                               validationRules={{
                                 required: `${title} is required`,
-                                minLength: {
-                                  value: 10,
-                                  message: "Minimum length is 10 characters",
-                                },
-                                maxLength: {
-                                  value: 200,
-                                  message: "Maximum length is 200 characters",
-                                },
+                                // minLength: {
+                                //   value: 10,
+                                //   message: "Minimum length is 10 characters",
+                                // },
+                                // maxLength: {
+                                //   value: 200,
+                                //   message: "Maximum length is 200 characters",
+                                // },
                               }}
                             />
                           );
@@ -191,7 +214,7 @@ export default function FormBuilder({ formId }: Props) {
             type="submit"
             className="rounded bg-indigo-500 px-6 py-2 text-white font-medium hover:bg-indigo-700"
           >
-            Submit
+            {formIsPending ? "Submitting" : "Submit"}
           </button>
         </div>
       </ComponentCard>
