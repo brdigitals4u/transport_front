@@ -3,6 +3,7 @@ interface ComponentCardProps {
   children: React.ReactNode;
   className?: string; // Additional custom classes for styling
   desc?: string; // Description text
+  sectionShow?: string | null;
 }
 
 const MySection: React.FC<ComponentCardProps> = ({
@@ -10,11 +11,17 @@ const MySection: React.FC<ComponentCardProps> = ({
   children,
   className = "",
   desc = "",
+  sectionShow,
 }) => {
+  //console.log(sectionShow);
   return (
     <div>
-      <fieldset className="border border-gray-200 p-3 dark:bg-white/[0.03]">
-        <legend className="text-gray-500 px-1 ms-[-4px]"> {title}</legend>
+      <fieldset
+        className={`${sectionShow && "border border-gray-200 p-3 dark:border-gray-500 dark:bg-white/[0.03]"}`}
+      >
+        {sectionShow && (
+          <legend className="text-gray-500 px-1 ms-[-4px]"> {title}</legend>
+        )}
         {children}
       </fieldset>
     </div>

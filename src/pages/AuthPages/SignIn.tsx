@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GridShape from "../../components/common/GridShape";
 // import Input from "../../components/form/input/InputField";
 import Label from "../../components/form/Label";
@@ -13,7 +13,7 @@ import Button from "../../components/ui/button/Button";
 import PageMeta from "../../components/common/PageMeta";
 
 import { useAxios } from "../../utils/useAxios";
-import { setItem } from "../../utils/storage";
+import { removeItem, setItem } from "../../utils/storage";
 import { useForm } from "react-hook-form";
 
 export default function SignIn() {
@@ -45,6 +45,11 @@ export default function SignIn() {
     // );
     mutate({ ...data });
   };
+
+  useEffect(() => {
+    removeItem("user");
+    navigate("/");
+  }, []);
   return (
     <>
       <PageMeta

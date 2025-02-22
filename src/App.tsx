@@ -18,6 +18,7 @@ import Videos from "./pages/UiElements/Videos";
 import UserProfiles from "./pages/UserProfiles";
 import AddCarrier from "./pages/Master/AddCarrier";
 import TrackVehicle from "./pages/Tracking/TrackVehicle";
+import { filterMneus } from "./layout/AppSidebar";
 //testing
 export default function App() {
   return (
@@ -45,7 +46,24 @@ export default function App() {
             <Route path="/buttons" element={<Buttons />} />
             <Route path="/images" element={<Images />} />
             <Route path="/videos" element={<Videos />} />
-            <Route path="/masters/carrier" element={<AddCarrier />} />
+
+            {filterMneus.map((items, _) => {
+              //console.log(items.subItems);
+              return (
+                <Route key={_}>
+                  {items?.subItems?.map((path, index) => {
+                    return (
+                      <Route
+                        key={index}
+                        path={path?.path}
+                        element={<AddCarrier />}
+                      />
+                    );
+                  })}
+                </Route>
+              );
+            })}
+
             <Route path="/tracking/trackvehicle" element={<TrackVehicle />} />
           </Route>
 

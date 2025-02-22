@@ -20,6 +20,7 @@ import {
 } from "../icons";
 import SidebarWidget from "./SidebarWidget";
 import { Menus, Other } from "../menu/menu";
+import { getItem } from "../utils/storage";
 
 type NavItem = {
   name: string;
@@ -35,7 +36,15 @@ type NavItem = {
   }[];
 };
 
-const navItems: NavItem[] = Menus;
+const user = getItem("user");
+// console.log("CARRIER");
+const userRole = user?.user.role;
+
+export const filterMneus = Menus.filter((item, _) =>
+  item.role.includes(userRole),
+);
+
+const navItems: NavItem[] = filterMneus;
 const othersItems: NavItem[] = Other;
 // const navItems: NavItem[] = [
 //   {
@@ -393,7 +402,7 @@ const AppSidebar: React.FC = () => {
                                 : "menu-item-icon-inactive"
                             }`}
                           >
-                            <Icon />
+                            <Icon className="size-5" />
                           </span>
                           {(isExpanded || isHovered || isMobileOpen) && (
                             <span className="menu-item-text">{nav.name}</span>
@@ -426,7 +435,7 @@ const AppSidebar: React.FC = () => {
                                   : "menu-item-icon-inactive"
                               }`}
                             >
-                              <Icon />
+                              <Icon className="size-5" />
                             </span>
                             {(isExpanded || isHovered || isMobileOpen) && (
                               <span className="menu-item-text">{nav.name}</span>

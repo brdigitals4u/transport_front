@@ -1,17 +1,17 @@
-import { ComponentType } from "react";
-import { RxDashboard } from "react-icons/rx";
-
-import { IconType } from "react-icons";
+import { BiSolidData } from "react-icons/bi";
+import { MdDashboard } from "react-icons/md";
+import { TbCurrentLocation } from "react-icons/tb";
+import { FaUserShield } from "react-icons/fa";
 
 export const Menus = [
   {
-    icon: RxDashboard,
+    icon: MdDashboard,
     name: "Dashboard",
     role: ["ADMIN"],
     path: "/dashboard",
   },
   {
-    icon: RxDashboard,
+    icon: BiSolidData,
     name: "Masters",
     role: ["ADMIN", "CARRIER"],
     path: "/masters",
@@ -31,13 +31,13 @@ export const Menus = [
       { name: "Permits", path: "/masters/permits", role: ["ADMIN", "CARRIER"] },
       {
         name: "Existing Renewal Docs",
-        path: "/existing-renewal-docs",
+        path: "/masters/existing-renewal-docs",
         role: ["ADMIN", "CARRIER"],
       },
     ],
   },
   {
-    icon: RxDashboard,
+    icon: TbCurrentLocation,
     name: "Tracking",
     role: ["ADMIN", "CARRIER"],
     path: "/tracking",
@@ -55,7 +55,7 @@ export const Menus = [
     ],
   },
   {
-    icon: RxDashboard,
+    icon: FaUserShield,
     name: "Customers",
     path: "/customers",
     role: ["ADMIN"],
