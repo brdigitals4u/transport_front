@@ -82,7 +82,7 @@ export default function FormBuilder({ getformData }: Props) {
 
   const onSubmit = (data: any) => {
     formMutate({
-      formId: "carrier",
+      formId: getformData?.formid,
       formData: data,
     });
   };
