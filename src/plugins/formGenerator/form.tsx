@@ -8,7 +8,7 @@ interface props {
   formId: string;
 }
 const FormGenerator = ({ formId }: props) => {
-  const [showList, setShowList] = useState(false);
+  const [showList, setShowList] = useState(true);
   const { res, mutate, isPending, error } = useAxios({
     url: "/api/service/form",
   });
@@ -20,12 +20,13 @@ const FormGenerator = ({ formId }: props) => {
   }, [formId]);
 
   const handleSplite = () => {
-    console.log(showList);
+    //console.log(showList);
     showList ? setShowList(false) : setShowList(true);
   };
   if (isPending) {
     return <div>Loading</div>;
   }
+
   return (
     <>
       <ContainerBox

@@ -15,6 +15,7 @@ export default function DataTable({ formId }: Props) {
   useEffect(() => {
     if (formId) {
       mutate({ formId });
+      console.log(formId);
     }
   }, [formId]); // Added dependency
 
@@ -50,7 +51,7 @@ export default function DataTable({ formId }: Props) {
               className="size-5"
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 24 24"
               height="1em"
               width="1em"
@@ -67,7 +68,7 @@ export default function DataTable({ formId }: Props) {
               className="size-5"
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 24 24"
               height="1em"
               width="1em"
@@ -88,12 +89,15 @@ export default function DataTable({ formId }: Props) {
     <div
       style={{
         width: "100%",
-        maxHeight: "500px",
+        minHeight: "500px",
         maxWidth: "1030px",
         overflowX: "auto",
       }}
     >
       <DataGrid
+        sx={{
+          height: "500px",
+        }}
         rows={rows}
         columns={columns as any}
         pageSizeOptions={[10]}

@@ -17,8 +17,12 @@ import Images from "./pages/UiElements/Images";
 import Videos from "./pages/UiElements/Videos";
 import UserProfiles from "./pages/UserProfiles";
 import AddCarrier from "./pages/Master/AddCarrier";
+import Trailer from "./pages/Master/AddTrailer";
 import TrackVehicle from "./pages/Tracking/TrackVehicle";
 import { filterMneus } from "./layout/AppSidebar";
+import Counter from "./pages/redux-test/Counter";
+import AddDrivers from "./pages/Master/AddDrivers";
+
 //testing
 export default function App() {
   return (
@@ -46,8 +50,9 @@ export default function App() {
             <Route path="/buttons" element={<Buttons />} />
             <Route path="/images" element={<Images />} />
             <Route path="/videos" element={<Videos />} />
+            <Route path="/redux-test" element={<Counter />} />
 
-            {filterMneus.map((items, _) => {
+            {/* {filterMneus.map((items, _) => {
               //console.log(items.subItems);
               return (
                 <Route key={_}>
@@ -62,7 +67,11 @@ export default function App() {
                   })}
                 </Route>
               );
-            })}
+            })} */}
+
+            <Route path="/fleet/carrier" element={<AddCarrier />} />
+            <Route path="/fleet/trailer" element={<Trailer />} />
+            <Route path="/fleet/drivers" element={<AddDrivers />} />
 
             <Route path="/tracking/trackvehicle" element={<TrackVehicle />} />
           </Route>

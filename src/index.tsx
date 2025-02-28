@@ -13,6 +13,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { SnackbarCloseButton } from "./components/SnackbarCloseButton";
 import { SnackbarProvider } from "notistack";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -20,25 +22,27 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AppWrapper>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <SnackbarProvider
-            action={(key) => (
-              <SnackbarCloseButton key={key as unknown as string} />
-            )}
-            //autoHideDuration={2000}
-            // open={true}
-            //persist={true}
-            maxSnack={1}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            hideIconVariant
-          >
-            <App />
-          </SnackbarProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </AppWrapper>
+    <Provider store={store}>
+      <AppWrapper>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <SnackbarProvider
+              action={(key) => (
+                <SnackbarCloseButton key={key as unknown as string} />
+              )}
+              autoHideDuration={2000}
+              // open={true}
+              //persist={true}
+              maxSnack={1}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              hideIconVariant
+            >
+              <App />
+            </SnackbarProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </AppWrapper>
+    </Provider>
   </React.StrictMode>,
 );
 
