@@ -8,7 +8,12 @@ interface AxiosProps {
   onError?: (error: any) => void;
 }
 
-export const useAxios = ({ action, url, onSuccess = () => {}, onError = () => {} }: AxiosProps) => {
+export const useAxios = ({
+  action,
+  url,
+  onSuccess = () => {},
+  onError = () => {},
+}: AxiosProps) => {
   const mutation: UseMutationResult<any, any, any, any> = useMutation({
     mutationFn: (body: any) => {
       const payload = {

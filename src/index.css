@@ -10,6 +10,21 @@
   }
 }
 
+.sticky-header{
+  position: sticky !important;
+  left: 0;
+  z-index: 100; /* Ensure it's above other columns */
+  background: white;
+}
+
+.sticky-cell {
+  position: sticky !important;
+  left: 0;
+  z-index: 99; /* Keep it below the header */
+  background: white;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
 /* @layer components {
   .menu-item {
     @apply relative flex items-center gap-3 px-3 py-2 font-medium rounded-lg text-theme-sm;
@@ -63,16 +78,16 @@
     @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-theme-sm;
   }
   .menu-item-active {
-    @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+    @apply bg-indigo-500 text-white dark:bg-brand-500/[0.12] dark:text-brand-400;
   }
   .menu-item-inactive {
-    @apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+    @apply text-gray-700 hover:bg-indigo-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
   }
   .menu-item-icon {
     @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400;
   }
   .menu-item-icon-active {
-    @apply text-brand-500 dark:text-brand-400;
+    @apply text-white dark:text-brand-400;
   }
   .menu-item-icon-inactive {
     @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
@@ -92,10 +107,10 @@
     @apply relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-theme-sm font-medium;
   }
   .menu-dropdown-item-active {
-    @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+    @apply bg-indigo-100 text-indigo-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
   }
   .menu-dropdown-item-inactive {
-    @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5;
+    @apply text-gray-700 hover:bg-indigo-100 dark:text-gray-300 dark:hover:bg-white/5;
   }
 
   .menu-dropdown-badge {
@@ -319,7 +334,9 @@ span.flatpickr-weekday,
   @apply !bg-none;
 }
 .flatpickr-day.inRange {
-  box-shadow: -5px 0 0 #f9fafb, 5px 0 0 #f9fafb !important;
+  box-shadow:
+    -5px 0 0 #f9fafb,
+    5px 0 0 #f9fafb !important;
   @apply dark:!shadow-datepicker;
 }
 .flatpickr-day.inRange,
@@ -593,7 +610,8 @@ span.flatpickr-weekday,
 
 .task {
   border-radius: 0.75rem;
-  box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1),
+  box-shadow:
+    0px 1px 3px 0px rgba(16, 24, 40, 0.1),
     0px 1px 2px 0px rgba(16, 24, 40, 0.06);
   opacity: 0.8;
   cursor: grabbing; /* Changes the cursor to indicate dragging */

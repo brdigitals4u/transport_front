@@ -10,7 +10,7 @@ interface Payload {
 export const requestPayload = (
   payload: Payload,
   url: string,
-  headers: Record<string, string> = { "Content-Type": "application/json" }
+  headers: Record<string, string> = { "Content-Type": "application/json" },
 ) => {
   const axiosInstance = axios.create({
     baseURL: config.baseURL,
@@ -31,7 +31,7 @@ export const requestPayload = (
 
   axiosInstance.interceptors.response.use(
     (response) => response,
-    (err) => Promise.reject(err)
+    (err) => Promise.reject(err),
   );
 
   return axiosInstance(url, options);
