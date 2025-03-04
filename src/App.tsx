@@ -22,6 +22,8 @@ import TrackVehicle from "./pages/Tracking/TrackVehicle";
 import { filterMneus } from "./layout/AppSidebar";
 import Counter from "./pages/redux-test/Counter";
 import AddDrivers from "./pages/Master/AddDrivers";
+import AssignLoad from "./pages/Master/AssignLoad";
+import LoadOrders from "./pages/Master/LoadOrders";
 
 //testing
 export default function App() {
@@ -72,6 +74,8 @@ export default function App() {
             <Route path="/fleet/carrier" element={<AddCarrier />} />
             <Route path="/fleet/trailer" element={<Trailer />} />
             <Route path="/fleet/drivers" element={<AddDrivers />} />
+            <Route path="/fleet/assignload" element={<AssignLoad />} />
+            <Route path="/fleet/customer_orders" element={<LoadOrders />} />
 
             <Route path="/tracking/trackvehicle" element={<TrackVehicle />} />
           </Route>

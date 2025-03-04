@@ -8,6 +8,9 @@ interface Props {
   control: any;
 }
 
+// const MIN_DATE = new Date();
+// MIN_DATE.setDate(MIN_DATE.getDate() - 0);
+
 const MyDatePicker = ({ name, control }: Props) => {
   return (
     <Div>
@@ -16,6 +19,7 @@ const MyDatePicker = ({ name, control }: Props) => {
         control={control}
         render={({ field }) => (
           <Datepicker
+            // minDate={MIN_DATE}
             useRange={false}
             asSingle={true}
             value={{ startDate: field.value, endDate: field.value }}
