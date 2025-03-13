@@ -5,9 +5,10 @@ import { useAxios } from "../../utils/useAxios";
 
 interface Props {
   formId: string;
+  getEdit: (id: number, target: string) => void;
 }
 
-export default function DataTable({ formId }: Props) {
+export default function DataTable({ formId, getEdit }: Props) {
   const { res, mutate, isPending, error } = useAxios({
     url: "/api/auth/tabledata",
   });
@@ -15,7 +16,7 @@ export default function DataTable({ formId }: Props) {
   useEffect(() => {
     if (formId) {
       mutate({ formId });
-      console.log(formId);
+      // console.log(formId);
     }
   }, [formId]); // Added dependency
 
@@ -23,12 +24,14 @@ export default function DataTable({ formId }: Props) {
   if (error) return <p>Error fetching data</p>;
 
   const handleEdit = (id: number) => {
-    console.log("Edit", id);
+    // console.log("Edit", id);
+    getEdit(id, "edit");
     // Your edit logic here
   };
 
   const handleDelete = (id: number) => {
-    console.log("Delete", id);
+    // console.log("Delete", id);
+    getEdit(id, "delete");
     // Your delete logic here
   };
   const columns = [
@@ -90,7 +93,7 @@ export default function DataTable({ formId }: Props) {
       style={{
         width: "100%",
         minHeight: "500px",
-        maxWidth: "1030px",
+        maxWidth: "1035px",
         overflowX: "auto",
       }}
     >

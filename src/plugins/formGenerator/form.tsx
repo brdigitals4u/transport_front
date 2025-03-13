@@ -9,8 +9,17 @@ interface props {
 }
 const FormGenerator = ({ formId }: props) => {
   const [showList, setShowList] = useState(true);
+  const [dataHide, setDataHide] = useState(true);
   const { res, mutate, isPending, error } = useAxios({
     url: "/api/service/form",
+  });
+  const {
+    res: editRes,
+    mutate: editMatate,
+    isPending: editIsPending,
+    error: editError,
+  } = useAxios({
+    url: "/api/auth/geteditdata",
   });
 
   useEffect(() => {
@@ -21,8 +30,28 @@ const FormGenerator = ({ formId }: props) => {
 
   const handleSplite = () => {
     //console.log(showList);
+    setDataHide(true);
     showList ? setShowList(false) : setShowList(true);
   };
+
+  const getEdit = (id: any, target: string) => {
+    setDataHide(false);
+    setShowList(false);
+    editMatate({
+      editId: id,
+      formId: formId,
+      target: target,
+    });
+  };
+  console.log(editRes?.data?.dataDelete);
+
+  useEffect(() => {
+    if (editRes?.data?.dataDelete) {
+      mutate({ formId });
+      setShowList(true);
+    }
+  }, [editRes?.data?.dataDelete]);
+
   if (isPending) {
     return <div>Loading</div>;
   }
@@ -42,9 +71,12 @@ const FormGenerator = ({ formId }: props) => {
       >
         <div>
           {showList ? (
-            <DataTable formId={formId} />
+            <DataTable getEdit={getEdit} formId={formId} />
           ) : (
-            <FormBuilder getformData={res?.data?.data} />
+            <FormBuilder
+              getformData={res?.data?.data}
+              editdata={dataHide ? {} : editRes?.data?.data}
+            />
           )}
         </div>
       </ContainerBox>

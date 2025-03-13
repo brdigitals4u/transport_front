@@ -14,6 +14,7 @@ import MyDatePicker from "../../components/formFields/MyDatePicker";
 
 interface Props {
   getformData: any;
+  editdata: any;
 }
 
 interface Column {
@@ -35,7 +36,7 @@ interface FormState {
   columns?: any;
 }
 
-export default function FormBuilder({ getformData }: Props) {
+export default function FormBuilder({ getformData, editdata = {} }: Props) {
   const [form, setForm] = useState<FormState>({});
   const [sections, setSections] = useState<Section[]>([]);
   const [columns, setColumns] = useState<Column[]>([]);
@@ -67,9 +68,7 @@ export default function FormBuilder({ getformData }: Props) {
   useEffect(() => {
     if (form?.sections) {
       setSections(form?.sections);
-      if (form?.columns) {
-        setColumns(form?.columns);
-      }
+      setColumns(form?.columns || []); // Ensure it's always an array
     }
   }, [form?.sections]);
 
@@ -110,6 +109,13 @@ export default function FormBuilder({ getformData }: Props) {
   // if (error?.code === "ERR_BAD_REQUEST") {
   //   return <NotFound />;
   // }
+
+  // useEffect(() => {
+  //   if (editdata && Object.keys(editdata).length > 0) {
+  //     reset({ ...editdata }); // Ensure `editdata` is spread properly
+  //   }
+  // }, [editdata, reset]);
+
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
       {sectionsMerge.map((section, index) => {
@@ -125,6 +131,13 @@ export default function FormBuilder({ getformData }: Props) {
                   const { title, field, component, placeholder, options } =
                     formfield as any;
 
+                  // console.log("Full editdata:", editdata);
+                  // console.log("Field key:", field);
+                  // console.log(
+                  //   "Value from editdata:",
+                  //   editdata?.[field] || "Not Found",
+                  // );
+
                   const fieldSet = () => {
                     switch (component) {
                       case "input":
@@ -136,6 +149,7 @@ export default function FormBuilder({ getformData }: Props) {
                               register={register}
                               error={errors[field] as FieldError | undefined}
                               placeholder={placeholder}
+                              defaultValue={editdata[0]?.[field] ?? ""}
                               validationRules={
                                 {
                                   //required: `${title} is required`,
@@ -153,7 +167,6 @@ export default function FormBuilder({ getformData }: Props) {
                           </>
                         );
                       case "select":
-                        //console.log(options);
                         return (
                           <>
                             <Label>{title}</Label>
@@ -162,6 +175,11 @@ export default function FormBuilder({ getformData }: Props) {
                               register={register}
                               error={errors[field] as FieldError | undefined}
                               options={options || []}
+                              selected={
+                                editdata[0]?.[field]?.value ||
+                                editdata[0]?.[field] ||
+                                ""
+                              }
                               validationRules={
                                 {
                                   // required: `${title} is required`,
@@ -179,6 +197,7 @@ export default function FormBuilder({ getformData }: Props) {
                               register={register}
                               error={errors[field] as FieldError | undefined}
                               placeholder={placeholder}
+                              defaultValue={editdata?.[field] ?? null}
                               validationRules={
                                 {
                                   //required: `${title} is required`,
