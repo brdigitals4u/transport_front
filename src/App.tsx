@@ -24,6 +24,9 @@ import Counter from "./pages/redux-test/Counter";
 import AddDrivers from "./pages/Master/AddDrivers";
 import AssignLoad from "./pages/Master/AssignLoad";
 import LoadOrders from "./pages/Master/LoadOrders";
+import AddFrom from "./pages/Form/AddForm";
+import AddFromSections from "./pages/Form/AddFormSections";
+import AddFromColumns from "./pages/Form/AddFormColumns";
 
 //testing
 export default function App() {
@@ -78,6 +81,10 @@ export default function App() {
             <Route path="/fleet/customer_orders" element={<LoadOrders />} />
 
             <Route path="/tracking/trackvehicle" element={<TrackVehicle />} />
+
+            <Route path="/form/addform" element={<AddFrom />} />
+            <Route path="/form/addsection" element={<AddFromSections />} />
+            <Route path="/form/addcoulumn" element={<AddFromColumns />} />
           </Route>
 
           {/* Auth Layout */}

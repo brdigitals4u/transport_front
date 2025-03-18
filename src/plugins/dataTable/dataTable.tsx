@@ -103,6 +103,13 @@ export default function DataTable({ formId, getEdit }: Props) {
         }}
         rows={rows}
         columns={columns as any}
+        getRowId={(row) =>
+          formId === "my_forms" ||
+          formId === "my_forms_sections" ||
+          formId === "my_forms_columns"
+            ? row.formid
+            : row.id
+        }
         pageSizeOptions={[10]}
         pagination
         paginationMode="client"
