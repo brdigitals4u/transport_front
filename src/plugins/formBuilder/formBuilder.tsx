@@ -126,7 +126,9 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
               title={`${section?.sectionid ? section?.title : ""}`}
               sectionShow={section?.sectionid ? section?.title : ""}
             >
-              <div className="grid grid-cols-3 gap-4">
+              <div
+                className={`grid  gap-4 ${getformData?.classes ? getformData?.classes : "grid-cols-3"}`}
+              >
                 {section.columns?.map((formfield, findex) => {
                   const { title, field, component, placeholder, options } =
                     formfield as any;

@@ -27,6 +27,9 @@ import LoadOrders from "./pages/Master/LoadOrders";
 import AddFrom from "./pages/Form/AddForm";
 import AddFromSections from "./pages/Form/AddFormSections";
 import AddFromColumns from "./pages/Form/AddFormColumns";
+import Users from "./pages/Admin/users";
+import ResetPassword from "./pages/AuthPages/ResetPassword";
+import ForgotPassword from "./pages/AuthPages/ForgotPassword";
 
 //testing
 export default function App() {
@@ -73,7 +76,7 @@ export default function App() {
                 </Route>
               );
             })} */}
-
+            <Route path="/fleet/users" element={<Users />} />
             <Route path="/fleet/carrier" element={<AddCarrier />} />
             <Route path="/fleet/trailer" element={<Trailer />} />
             <Route path="/fleet/drivers" element={<AddDrivers />} />
@@ -90,6 +93,11 @@ export default function App() {
           {/* Auth Layout */}
           <Route element={<AuthLayout />}>
             <Route path="/" element={<SignIn />} />
+
+            <Route path="/generatepassword" element={<ForgotPassword />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+
+            <Route path="/reset-password" element={<ResetPassword />} />
             {/* <Route path="/signup" element={<SignUp />} /> */}
           </Route>
 

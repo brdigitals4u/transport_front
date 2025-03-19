@@ -23,6 +23,8 @@ export const useMenus = (userRole: string) => {
     }
   }, [res]);
 
+  console.log(res);
+
   //   useEffect(() => {
   //     const fetchMenus = async () => {
   //       try {

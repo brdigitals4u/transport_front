@@ -32,7 +32,7 @@ export const filterMneus = Menus.filter((item, _) =>
 );
 
 const AppSidebar: React.FC = () => {
-  const menus = useMenus("ADMIN");
+  const menus = useMenus(userRole);
   const navItems: NavItem[] = menus;
   const othersItems: NavItem[] = Other;
 
