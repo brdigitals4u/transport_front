@@ -6,6 +6,7 @@ import DataTable from "../dataTable/dataTable";
 
 interface props {
   formId: string;
+  // data?: any;
 }
 const FormGenerator = ({ formId }: props) => {
   const [showList, setShowList] = useState(true);

@@ -76,7 +76,7 @@ export default function App() {
                 </Route>
               );
             })} */}
-            <Route path="/fleet/users" element={<Users />} />
+            <Route path="/users/users" element={<Users />} />
             <Route path="/fleet/carrier" element={<AddCarrier />} />
             <Route path="/fleet/trailer" element={<Trailer />} />
             <Route path="/fleet/drivers" element={<AddDrivers />} />

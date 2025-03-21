@@ -6,7 +6,12 @@ export default function Users() {
     <>
       <PageMeta title="TTM Add User | Admin User" description="" />
       <div>
-        <FormGenerator formId="user" />
+        <FormGenerator
+          formId="user"
+          // data={{
+          //   table: "user",
+          // }}
+        />
       </div>
     </>
   );
