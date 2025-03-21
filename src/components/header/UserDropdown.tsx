@@ -18,7 +18,6 @@ export default function UserDropdown() {
   }
 
   const getUser = getItem("user");
-  console.log(getUser);
   const logout = () => {
     removeItem("user");
     navigate("/");

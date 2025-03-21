@@ -6,16 +6,17 @@ import { useAxios } from "../../utils/useAxios";
 interface Props {
   formId: string;
   getEdit: (id: number, target: string) => void;
+  formIntData?: any;
 }
 
-export default function DataTable({ formId, getEdit }: Props) {
+export default function DataTable({ formId, getEdit, formIntData }: Props) {
   const { res, mutate, isPending, error } = useAxios({
     url: "/api/auth/tabledata",
   });
 
   useEffect(() => {
     if (formId) {
-      mutate({ formId });
+      mutate({ formId, formIntData });
       // console.log(formId);
     }
   }, [formId]); // Added dependency

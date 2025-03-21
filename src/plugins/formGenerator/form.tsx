@@ -6,9 +6,9 @@ import DataTable from "../dataTable/dataTable";
 
 interface props {
   formId: string;
-  // data?: any;
+  formIntData?: any;
 }
-const FormGenerator = ({ formId }: props) => {
+const FormGenerator = ({ formId, formIntData }: props) => {
   const [showList, setShowList] = useState(true);
   const [dataHide, setDataHide] = useState(true);
   const { res, mutate, isPending, error } = useAxios({
@@ -30,7 +30,6 @@ const FormGenerator = ({ formId }: props) => {
   }, [formId]);
 
   const handleSplite = () => {
-    //console.log(showList);
     setDataHide(true);
     showList ? setShowList(false) : setShowList(true);
   };
@@ -44,7 +43,6 @@ const FormGenerator = ({ formId }: props) => {
       target: target,
     });
   };
-  console.log(editRes?.data?.dataDelete);
 
   useEffect(() => {
     if (editRes?.data?.dataDelete) {
@@ -72,7 +70,11 @@ const FormGenerator = ({ formId }: props) => {
       >
         <div>
           {showList ? (
-            <DataTable getEdit={getEdit} formId={formId} />
+            <DataTable
+              getEdit={getEdit}
+              formId={formId}
+              formIntData={formIntData}
+            />
           ) : (
             <FormBuilder
               getformData={res?.data?.data}

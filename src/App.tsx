@@ -61,7 +61,7 @@ export default function App() {
             <Route path="/redux-test" element={<Counter />} />
 
             {/* {filterMneus.map((items, _) => {
-              //console.log(items.subItems);
+
               return (
                 <Route key={_}>
                   {items?.subItems?.map((path, index) => {

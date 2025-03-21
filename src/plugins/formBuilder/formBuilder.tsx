@@ -82,8 +82,11 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
   });
 
   const onSubmit = (data: any) => {
-    console.log(getformData?.formid);
-    console.log(data);
+    // if (data.user_id) {
+    //   data.user_id = Number(data.user_id); // Ensure it's an integer
+    // }
+
+    console.log("Submitting data:", data);
     formMutate({
       formId: getformData?.formid,
       formData: data,
@@ -95,7 +98,7 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
       enqueueSnackbar(formRes?.data?.message, {
         variant: "success",
       });
-      //console.log(formRes?.data?.success);
+
       reset();
     }
   }, [formRes]);
@@ -104,8 +107,7 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
     ...sections,
     { sectionid: null, title: "New Section", columns: columns },
   ];
-  //console.log(sectionsMerge);
-  // console.log(error?.code);
+
   // if (error?.code === "ERR_BAD_REQUEST") {
   //   return <NotFound />;
   // }
@@ -130,15 +132,16 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
                 className={`grid  gap-4 ${getformData?.classes ? getformData?.classes : "grid-cols-3"}`}
               >
                 {section.columns?.map((formfield, findex) => {
-                  const { title, field, component, placeholder, options } =
-                    formfield as any;
+                  const {
+                    title,
+                    field,
+                    component,
+                    placeholder,
+                    options,
+                    type,
+                  } = formfield as any;
 
-                  // console.log("Full editdata:", editdata);
-                  // console.log("Field key:", field);
-                  // console.log(
-                  //   "Value from editdata:",
-                  //   editdata?.[field] || "Not Found",
-                  // );
+                  // console.log(type);
 
                   const fieldSet = () => {
                     switch (component) {
@@ -152,6 +155,7 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
                               error={errors[field] as FieldError | undefined}
                               placeholder={placeholder}
                               defaultValue={editdata[0]?.[field] ?? ""}
+                              type={type}
                               validationRules={
                                 {
                                   //required: `${title} is required`,
@@ -169,6 +173,7 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
                           </>
                         );
                       case "select":
+                        //console.log(field, type === "number");
                         return (
                           <>
                             <Label>{title}</Label>
@@ -178,15 +183,17 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
                               error={errors[field] as FieldError | undefined}
                               options={options || []}
                               selected={
-                                editdata[0]?.[field]?.value ||
-                                editdata[0]?.[field] ||
-                                ""
+                                type === "number"
+                                  ? Number(
+                                      editdata[0]?.[field]?.value ||
+                                        editdata[0]?.[field] ||
+                                        0,
+                                    )
+                                  : editdata[0]?.[field]?.value ||
+                                    editdata[0]?.[field] ||
+                                    ""
                               }
-                              validationRules={
-                                {
-                                  // required: `${title} is required`,
-                                }
-                              }
+                              validationRules={{}}
                             />
                           </>
                         );

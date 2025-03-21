@@ -8,9 +8,9 @@ export default function Users() {
       <div>
         <FormGenerator
           formId="user"
-          // data={{
-          //   table: "user",
-          // }}
+          formIntData={{
+            password: 0,
+          }}
         />
       </div>
     </>

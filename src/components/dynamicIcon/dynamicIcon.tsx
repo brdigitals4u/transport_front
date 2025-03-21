@@ -30,14 +30,12 @@ const DynamicIcon: React.FC<DynamicIconProps> = ({ iconName, size }) => {
   const icons = iconLibraries[library.toLowerCase()];
 
   if (!icons) {
-    console.warn(`Icon set for prefix "${library}" not found`);
     return null;
   }
 
   const IconComponent = icons[icon] as IconType | undefined;
 
   if (!IconComponent) {
-    console.warn(`Icon "${icon}" not found in "${library}" set`);
     return null;
   }
 
