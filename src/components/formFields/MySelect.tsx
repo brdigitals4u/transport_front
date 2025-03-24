@@ -7,6 +7,7 @@ interface MySelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   error?: FieldError;
   validationRules?: object;
   selected?: any;
+  type?: any;
   options: { value: string; label: string }[]; // Array of options
 }
 
@@ -16,17 +17,19 @@ export function MySelect({
   error,
   validationRules,
   selected,
+  type,
   options,
   ...rest
 }: MySelectProps) {
-  const [selectValues, setSelectValue] = useState(selected || "");
+  const [selectValues, setSelectValue] = useState(selected || "" || 0);
 
   useEffect(() => {
-    //console.log("Updated selected value:", JSON.stringify(selected, null, 2));
-    if (typeof selected === "string" || typeof selected === "number") {
-      setSelectValue(String(selected));
+    if (type === "number") {
+      setSelectValue(selected !== undefined ? Number(selected) : 0);
+    } else {
+      setSelectValue(selected || "");
     }
-  }, [selected]);
+  }, [selected, type]);
 
   return (
     <div>
@@ -34,7 +37,11 @@ export function MySelect({
         {...register(name, validationRules)}
         {...rest}
         value={selectValues} // Controlled input
-        onChange={(e) => setSelectValue(e.target.value)} // Keep state in sync
+        onChange={(e) =>
+          setSelectValue(
+            type === "number" ? Number(e.target.value) : e.target.value,
+          )
+        } // Keep state in sync
         className="h-9 w-full border px-4 py-1 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-none focus:ring bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring focus:ring-brand-500/10"
       >
         <option value="">Select an option</option>

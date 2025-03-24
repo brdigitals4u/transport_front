@@ -22,6 +22,7 @@ export default function UserDropdown() {
     removeItem("user");
     navigate("/");
   };
+
   return (
     <div className="relative">
       <button

@@ -12,7 +12,7 @@ const FormGenerator = ({ formId, formIntData }: props) => {
   const [showList, setShowList] = useState(true);
   const [dataHide, setDataHide] = useState(true);
   const { res, mutate, isPending, error } = useAxios({
-    url: "/api/service/form",
+    url: "/api/auth/form",
   });
   const {
     res: editRes,

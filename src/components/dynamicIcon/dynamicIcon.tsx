@@ -7,6 +7,7 @@ import * as BiIcons from "react-icons/bi";
 import * as RiIcons from "react-icons/ri";
 import * as HiIcons from "react-icons/hi";
 import * as TbIcons from "react-icons/tb";
+import * as GiIcons from "react-icons/gi";
 // tb/TbCurrentLocation
 
 const iconLibraries: Record<string, Record<string, IconType>> = {
@@ -17,6 +18,7 @@ const iconLibraries: Record<string, Record<string, IconType>> = {
   ri: RiIcons,
   hi: HiIcons,
   tb: TbIcons,
+  gi: GiIcons,
 };
 
 interface DynamicIconProps {

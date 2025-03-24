@@ -11,7 +11,14 @@ import NotFound from "../../pages/OtherPage/NotFound";
 
 import { SnackbarProvider, VariantType, useSnackbar } from "notistack";
 import MyDatePicker from "../../components/formFields/MyDatePicker";
+interface FormColumn {
+  field: string;
+  type: "string" | "number" | "boolean"; // Extend with more types if needed
+}
 
+interface FormData {
+  [key: string]: any;
+}
 interface Props {
   getformData: any;
   editdata: any;
@@ -85,6 +92,25 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
     // if (data.user_id) {
     //   data.user_id = Number(data.user_id); // Ensure it's an integer
     // }
+
+    const formColumns =
+      getformData?.sections?.flatMap((section: any) => section.columns) || [];
+
+    Object.keys(data).forEach((key) => {
+      const fieldConfig = formColumns.find((col: any) => col.field === key);
+
+      if (fieldConfig) {
+        if (
+          fieldConfig.type === "number" &&
+          !isNaN(data[key]) &&
+          data[key] !== ""
+        ) {
+          data[key] = Number(data[key]); // Convert to number
+        } else if (fieldConfig.type === "boolean") {
+          data[key] = data[key] === "true" || data[key] === true; // Convert to boolean
+        }
+      }
+    });
 
     console.log("Submitting data:", data);
     formMutate({
@@ -182,16 +208,11 @@ export default function FormBuilder({ getformData, editdata = {} }: Props) {
                               register={register}
                               error={errors[field] as FieldError | undefined}
                               options={options || []}
+                              type={type}
                               selected={
-                                type === "number"
-                                  ? Number(
-                                      editdata[0]?.[field]?.value ||
-                                        editdata[0]?.[field] ||
-                                        0,
-                                    )
-                                  : editdata[0]?.[field]?.value ||
-                                    editdata[0]?.[field] ||
-                                    ""
+                                editdata[0]?.[field]?.value ||
+                                editdata[0]?.[field] ||
+                                ""
                               }
                               validationRules={{}}
                             />
