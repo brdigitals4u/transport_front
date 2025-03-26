@@ -30,6 +30,7 @@ import AddFromColumns from "./pages/Form/AddFormColumns";
 import Users from "./pages/Admin/users";
 import ResetPassword from "./pages/AuthPages/ResetPassword";
 import ForgotPassword from "./pages/AuthPages/ForgotPassword";
+import DriverOrder from "./pages/Driver/Order";
 
 //testing
 export default function App() {
@@ -88,6 +89,7 @@ export default function App() {
             <Route path="/form/addform" element={<AddFrom />} />
             <Route path="/form/addsection" element={<AddFromSections />} />
             <Route path="/form/addcoulumn" element={<AddFromColumns />} />
+            <Route path="/orders" element={<DriverOrder />} />
           </Route>
 
           {/* Auth Layout */}
@@ -98,6 +100,7 @@ export default function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/test" element={<>Dileep</>} />
             {/* <Route path="/signup" element={<SignUp />} /> */}
           </Route>
 
