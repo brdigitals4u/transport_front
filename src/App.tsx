@@ -100,7 +100,7 @@ export default function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/test" element={<>Dileep</>} />
+            <Route path="/test" element={<Dileep />} />
             {/* <Route path="/signup" element={<SignUp />} /> */}
           </Route>
 
@@ -111,3 +111,7 @@ export default function App() {
     </>
   );
 }
+
+const Dileep = () => {
+  return <>test</>;
+};
