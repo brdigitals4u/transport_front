@@ -96,5 +96,9 @@
     "@types/react-simple-maps": "~3.0.6",
     "prettier": "3.5.1",
     "tailwindcss": "^3.4.15"
+  },
+  "engines": {
+    "node": "22.x",
+    "yarn": "1.x"
   }
 }
