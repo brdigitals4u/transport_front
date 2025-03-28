@@ -7,7 +7,7 @@ export default function DriverOrder() {
       <PageMeta title="TTM Add Trailer | Admin Trailer" description="" />
       <div>
         {/* <FormBuilder formId={formId[2]} /> */}
-        <FormGenerator formId="loadorders" />
+        <FormGenerator formId="assignload" />
       </div>
     </>
   );

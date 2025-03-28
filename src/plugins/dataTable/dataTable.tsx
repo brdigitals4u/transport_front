@@ -119,6 +119,12 @@ export default function DataTable({ formId, getEdit, formIntData }: Props) {
           pagination: {
             paginationModel: { pageSize: 8, page: 0 }, // Default to 5 records per page
           },
+          columns: {
+            columnVisibilityModel: {
+              // Hide columns status and traderName
+              id: false,
+            },
+          },
         }}
         getRowClassName={(params) =>
           params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
